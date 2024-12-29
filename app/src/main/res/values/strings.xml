@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Star Calculator</string>
+    <string name="star_levels">STAR LEVELS</string>
+    <string name="set_all_stars">Set All Stars:</string>
+    <string name="current_level">Current Level</string>
+    <string name="star_cost_achievements">Star cost (Achievements): - %</string>
+    <string name="star_cost_masters">Star cost (Masters):  x</string>
+    <string name="scrapyard_v2">Scrapyard V2:</string>
+    <string name="target_star">Target Star:</string>
+    <string name="calculate">Calculate</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="enter_value">Enter Value</string>
+    <string name="enter_level">Enter Level</string>
+</resources>

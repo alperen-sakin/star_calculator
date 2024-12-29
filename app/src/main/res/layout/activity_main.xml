@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey1"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="18dp"
+    tools:context=".MainActivity">
+
+    <!--Title -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/star_levels"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <!--Set All Star section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/setAllStarsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/set_all_stars"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/setAllStarsEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/red_border"
+            android:hint="@string/current_level"
+            android:paddingStart="4dp"
+            android:inputType="number"
+            android:paddingEnd="4dp"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <!--Stars -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--Star 1 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp">
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="start"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="end"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Star 3 4 5 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="start"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="end"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Star 6 7 8 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="start"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="end"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- 9 10 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="start"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="0dp"
+                android:layout_gravity="end"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/starImageView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/star_foreground" />
+
+                <EditText
+                    android:id="@+id/starEdittext10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textAlignment="center" />
+            </FrameLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--Star cost achievement -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/starsCostsAchievementTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:layout_weight="1"
+            android:text="@string/star_cost_achievements" />
+
+        <EditText
+            android:id="@+id/starsCostsAchievementEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/red_border"
+            android:hint="@string/enter_value"
+            android:inputType="numberDecimal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintColor" />
+    </LinearLayout>
+
+    <!--Star cost master -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/starsCostsMasterTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:layout_weight="1"
+            android:text="@string/star_cost_masters" />
+
+        <EditText
+            android:id="@+id/starsCostsMasterEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintColor"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:background="@drawable/red_border"
+            android:layout_weight="1"
+            android:hint="@string/enter_value"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <!--Scrapyard V2  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/scrapyardTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:layout_weight="1"
+            android:text="@string/scrapyard_v2" />
+
+        <EditText
+            android:id="@+id/scrapyardEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintColor"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:background="@drawable/red_border"
+            android:layout_weight="1"
+            android:hint="@string/enter_level"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <!--Target Star -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/TargetStarTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:layout_weight="1"
+            android:text="@string/target_star" />
+
+        <EditText
+            android:id="@+id/TargetStarEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintColor"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:background="@drawable/red_border"
+            android:layout_weight="1"
+            android:hint="@string/enter_level"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:backgroundTint="@color/green"
+        android:text="@string/calculate" />
+
+
+    <!--required Golden Scrap -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@mipmap/goldenscrapimg" />
+
+        <TextView
+            android:id="@+id/requiredGoldenScrapTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:text="@string/_0" />
+    </LinearLayout>
+
+    <!--Required magnet -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/magnetimg" />
+
+        <TextView
+            android:id="@+id/requiredMagnetTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:text="@string/_0" />
+    </LinearLayout>
+
+    <!--required starFragment-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/star_fragmentimg" />
+
+        <TextView
+            android:id="@+id/requiredStarFragmentTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:text="@string/_0" />
+    </LinearLayout>
+
+
+</LinearLayout>

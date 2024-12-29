@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_empty="false" android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <stroke android:width="2dp" android:color="@android:color/holo_green_light" />
+            <corners android:radius="6dp" />
+        </shape>
+    </item>
+
+    <!-- Boş ve odakta değilken kenar rengi kırmızı -->
+    <item android:state_empty="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <stroke android:width="2dp" android:color="@android:color/holo_red_light" />
+            <corners android:radius="6dp" />
+        </shape>
+    </item>
+
+    <!-- Diğer durumlar -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <stroke android:width="2dp" android:color="@android:color/darker_gray" />
+            <corners android:radius="6dp" />
+        </shape>
+    </item>
+</selector>
