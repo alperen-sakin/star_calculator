@@ -14,3 +14,8 @@ This app is inspired by the following web-based calculators:
     - Current Star Level
     - Current Scrapyard V2 Level
     - Target Star Level
+
+## Download
+You can download the latest APK of Star Calculator from the link below:
+
+[Download Star Calculator APK](https://github.com/alperen-sakin/star_calculator/releases/latest)
