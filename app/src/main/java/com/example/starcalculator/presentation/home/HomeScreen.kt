@@ -1,11 +1,13 @@
 package com.example.starcalculator.presentation.home
 
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
@@ -14,6 +16,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.starcalculator.presentation.home.component.CustomTopAppBar
 import com.example.starcalculator.presentation.home.component.SetAllStarsBox
+import com.example.starcalculator.presentation.home.component.starsSection.StarsSection
 import com.example.starcalculator.presentation.home.viewmodel.HomeViewModel
 import com.example.starcalculator.presentation.ui.theme.SlateGray900
 
@@ -23,6 +26,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle()
+    val starsStates = viewModel.starsStates.collectAsStateWithLifecycle()
 
     val focusManager = LocalFocusManager.current
 
@@ -48,13 +52,21 @@ fun HomeScreen(
         Column(
             modifier = modifier
                 .padding(paddingValues = it)
-                .padding(vertical = 16.dp, horizontal = 8.dp)
+                .padding(vertical = 16.dp, horizontal = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             SetAllStarsBox(
                 onAllLevelChange = { allLevel ->
                     viewModel.onAllLevelChange(allLevel)
                 },
                 allLevel = state.value.allLevel,
+            )
+
+            StarsSection(
+                starsStates = starsStates.value,
+                onStarChange = { index, newStarValue -> viewModel.onStarChange(index, newStarValue) }
+
             )
         }
     }
