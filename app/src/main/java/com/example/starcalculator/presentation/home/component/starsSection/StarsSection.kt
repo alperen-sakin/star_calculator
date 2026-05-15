@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.example.starcalculator.presentation.home.constants.Constants.ROWS
 import com.example.starcalculator.presentation.home.viewmodel.StarsStates
@@ -25,13 +26,14 @@ fun StarsSection(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .background(color = SlateGray900)
+            .clip(shape = MaterialTheme.shapes.medium)
             .border(
                 width = 2.dp,
                 color = SlateGray800,
                 shape = MaterialTheme.shapes.medium
             )
+            .fillMaxWidth()
+            .background(color = SlateGray900)
             .padding(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
