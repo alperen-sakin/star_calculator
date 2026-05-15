@@ -9,4 +9,7 @@ object Constants {
     private const val THREE = 3
 
     val ROWS = listOf(TWO, THREE, THREE, TWO)
+
+    const val FIVE_PERCENT = 0.05f
+    const val FIFTY_PERCENT = 0.5f
 }
