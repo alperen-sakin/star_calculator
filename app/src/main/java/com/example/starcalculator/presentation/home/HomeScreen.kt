@@ -4,6 +4,8 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -16,6 +18,9 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.starcalculator.presentation.home.component.CustomTopAppBar
 import com.example.starcalculator.presentation.home.component.SetAllStarsBox
+import com.example.starcalculator.presentation.home.component.parametersSection.ParameterSectionEvents
+import com.example.starcalculator.presentation.home.component.parametersSection.ParameterSectionState
+import com.example.starcalculator.presentation.home.component.parametersSection.ParametersSection
 import com.example.starcalculator.presentation.home.component.starsSection.StarsSection
 import com.example.starcalculator.presentation.home.viewmodel.HomeViewModel
 import com.example.starcalculator.presentation.ui.theme.SlateGray900
@@ -52,7 +57,8 @@ fun HomeScreen(
         Column(
             modifier = modifier
                 .padding(paddingValues = it)
-                .padding(vertical = 16.dp, horizontal = 8.dp),
+                .padding(vertical = 16.dp, horizontal = 8.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -65,7 +71,31 @@ fun HomeScreen(
 
             StarsSection(
                 starsStates = starsStates.value,
-                onStarChange = { index, newStarValue -> viewModel.onStarChange(index, newStarValue) }
+                onStarChange = { index, newStarValue ->
+                    viewModel.onStarChange(
+                        index,
+                        newStarValue
+                    )
+                }
+
+            )
+
+            ParametersSection(
+                state = ParameterSectionState(
+                    achievementLvl2 = state.value.achievementLvl2,
+                    masteryLvl17 = state.value.masteryLvl17,
+                    scrapyardV2 = state.value.scrapyardV2,
+                    targetStar = state.value.targetStar,
+                ),
+
+                events = ParameterSectionEvents(
+                    onAchievementLvl2Change = viewModel::onAchievementLvl2Change,
+                    onMasteryLvl17Change = viewModel::onMasteryLvl17Change,
+                    onScrapyardV2Change = viewModel::onScrapyardV2Change,
+                    onTargetStarChange = viewModel::onTargetStarChange,
+                    onAdjustmentClick = viewModel::onAdjustmentClick
+
+                )
 
             )
         }
