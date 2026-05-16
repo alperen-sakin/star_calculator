@@ -45,7 +45,7 @@ fun ResultSection(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 32.dp),
+            .padding(bottom = 100.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
