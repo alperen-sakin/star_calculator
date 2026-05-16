@@ -35,9 +35,10 @@ import com.example.starcalculator.presentation.ui.theme.Yellow500
 fun SetAllStarsBox(
     onAllLevelChange: (String) -> Unit = {},
     allLevel: String,
+    modifier: Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .clip(MaterialTheme.shapes.medium)
             .border(
                 width = 2.dp,
