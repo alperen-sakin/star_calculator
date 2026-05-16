@@ -34,3 +34,5 @@ val Red500 = Color(0xFFef4444)
 val Cyan400 = Color(0xFF22d3ee)
 
 val TitleGradient = listOf(Yellow400, Amber600)
+
+val ButtonGradient = listOf(Emerald500, Emerald600)
