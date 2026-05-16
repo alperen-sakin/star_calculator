@@ -9,6 +9,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
@@ -21,8 +22,12 @@ import com.example.starcalculator.presentation.home.component.SetAllStarsBox
 import com.example.starcalculator.presentation.home.component.parametersSection.ParameterSectionEvents
 import com.example.starcalculator.presentation.home.component.parametersSection.ParameterSectionState
 import com.example.starcalculator.presentation.home.component.parametersSection.ParametersSection
+import com.example.starcalculator.presentation.home.component.resultsSection.ResultSection
+import com.example.starcalculator.presentation.home.component.resultsSection.ResultSectionState
 import com.example.starcalculator.presentation.home.component.starsSection.StarsSection
+import com.example.starcalculator.presentation.home.viewmodel.HomeState
 import com.example.starcalculator.presentation.home.viewmodel.HomeViewModel
+import com.example.starcalculator.presentation.home.viewmodel.StarsStates
 import com.example.starcalculator.presentation.ui.theme.SlateGray900
 
 @Composable
@@ -62,23 +67,7 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            SetAllStarsBox(
-                onAllLevelChange = { allLevel ->
-                    viewModel.onAllLevelChange(allLevel)
-                },
-                allLevel = state.value.allLevel,
-            )
-
-            StarsSection(
-                starsStates = starsStates.value,
-                onStarChange = { index, newStarValue ->
-                    viewModel.onStarChange(
-                        index,
-                        newStarValue
-                    )
-                }
-
-            )
+            TopSection(viewModel, state, starsStates)
 
             ParametersSection(
                 state = ParameterSectionState(
@@ -98,6 +87,39 @@ fun HomeScreen(
                 )
 
             )
+
+            ResultSection(
+                state = ResultSectionState(
+                    costMagnet = state.value.costMagnet,
+                    costGoldenScrap = state.value.costGoldenScrap,
+                    costFragment = state.value.costFragment
+                )
+            )
         }
     }
+}
+
+@Composable
+private fun TopSection(
+    viewModel: HomeViewModel,
+    state: State<HomeState>,
+    starsStates: State<StarsStates>
+) {
+    SetAllStarsBox(
+        onAllLevelChange = { allLevel ->
+            viewModel.onAllLevelChange(allLevel)
+        },
+        allLevel = state.value.allLevel,
+    )
+
+    StarsSection(
+        starsStates = starsStates.value,
+        onStarChange = { index, newStarValue ->
+            viewModel.onStarChange(
+                index,
+                newStarValue
+            )
+        }
+
+    )
 }
