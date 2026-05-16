@@ -70,6 +70,7 @@ fun HomeScreen(
             CustomFloatingButton(
                 onCalculateClick = {
                     focusManager.clearFocus()
+                    viewModel.onCalculateClick()
 
                     coroutineScope.launch {
                         scrollState.animateScrollTo(scrollState.maxValue)

@@ -2,6 +2,7 @@ package com.example.starcalculator.presentation.home.viewmodel
 
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
+import com.example.starcalculator.domain.useCase.CalculateTotalCostUseCase
 import com.example.starcalculator.presentation.home.constants.Constants.MAX_LEVEL_LENGTH
 import com.example.starcalculator.presentation.home.constants.Constants.MAX_STARS
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +14,9 @@ import javax.inject.Inject
 enum class ParameterType { ACHIEVEMENT, MASTERY, SCRAPYARD, TARGET }
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val calculateTotalCostUseCase: CalculateTotalCostUseCase
+) : ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
     val state = _state.asStateFlow()
@@ -124,6 +127,33 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                 ParameterType.SCRAPYARD -> state.copy(scrapyardV2 = newValue.toString())
                 ParameterType.TARGET -> state.copy(targetStar = newValue.toString())
             }
+        }
+    }
+
+    fun onCalculateClick() {
+        val currentState = _state.value
+
+        val currentStarsList = _starsStates.value.stars.map { it.toIntOrNull() ?: 0 }
+
+        val targetLevel = currentState.targetStar.toIntOrNull() ?: 0
+        val scrapyardLvl = currentState.scrapyardV2.toIntOrNull() ?: 0
+        val achievementLvl = currentState.achievementLvl2.toIntOrNull() ?: 0
+        val masteryLvl = currentState.masteryLvl17.toIntOrNull() ?: 0
+
+        val (totalGs, totalMagnet, totalFragment) = calculateTotalCostUseCase(
+            currentStars = currentStarsList,
+            targetStarLevel = targetLevel,
+            scrapyardLevel = scrapyardLvl,
+            achievementValue = achievementLvl,
+            masteryBoost17Value = masteryLvl
+        )
+
+        _state.update { state ->
+            state.copy(
+                costMagnet = totalMagnet.toString(),
+                costGoldenScrap = totalGs.toString(),
+                costFragment = totalFragment.toString()
+            )
         }
     }
 }
