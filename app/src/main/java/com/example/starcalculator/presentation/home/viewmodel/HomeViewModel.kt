@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.starcalculator.domain.useCase.CalculateTotalCostUseCase
 import com.example.starcalculator.presentation.home.constants.Constants.MAX_LEVEL_LENGTH
 import com.example.starcalculator.presentation.home.constants.Constants.MAX_STARS
+import com.example.starcalculator.presentation.util.toAbstractNotation
 import com.example.starcalculator.presentation.util.toFormattedNumber
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -152,7 +153,7 @@ class HomeViewModel @Inject constructor(
 
         _state.update { state ->
             state.copy(
-                costMagnet = totalMagnet.toString().toFormattedNumber(),
+                costMagnet = totalMagnet.toString().toAbstractNotation(),
                 costGoldenScrap = totalGs.toString().toFormattedNumber(),
                 costFragment = totalFragment.toString().toFormattedNumber()
             )
