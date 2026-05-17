@@ -1,6 +1,6 @@
-# Scrap Clicker - Star Cost Calculator v2
+# Scrap Clicker 2 - Star Cost Calculator v2
 
-A modern, high-performance Android utility application designed for **Scrap Clicker** players to calculate the precise scrap cost required to upgrade stars. 
+A modern, high-performance Android utility application designed for **Scrap Clicker 2** players to calculate the precise scrap cost required to upgrade stars. 
 
 This project has been completely rewritten from scratch using **Modern Android Development (MAD)** practices, transitioning from legacy XML to a fully reactive Jetpack Compose UI with robust background architecture.
 
