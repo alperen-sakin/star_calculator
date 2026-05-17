@@ -5,3 +5,7 @@ class ParameterBoxEvents(
     val onMinusClick: (String) -> Unit,
     val onPlusClick: (String) -> Unit,
 )
+
+class MagicBoxEvents(
+    val onMagicBoxClick: (Boolean) -> Unit
+)

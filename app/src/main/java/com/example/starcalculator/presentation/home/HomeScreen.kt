@@ -22,6 +22,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.starcalculator.presentation.home.component.CustomFloatingButton
 import com.example.starcalculator.presentation.home.component.CustomTopAppBar
 import com.example.starcalculator.presentation.home.component.SetAllStarsBox
+import com.example.starcalculator.presentation.home.component.parametersSection.MagicBoxEvents
+import com.example.starcalculator.presentation.home.component.parametersSection.MagicBoxState
 import com.example.starcalculator.presentation.home.component.parametersSection.ParameterSectionEvents
 import com.example.starcalculator.presentation.home.component.parametersSection.ParameterSectionState
 import com.example.starcalculator.presentation.home.component.parametersSection.ParametersSection
@@ -114,6 +116,12 @@ private fun BottomSection(
             onTargetStarChange = viewModel::onTargetStarChange,
             onAdjustmentClick = viewModel::onAdjustmentClick
 
+        ),
+        magicBoxState = MagicBoxState(
+            isMagicBox = state.value.isMagicBox
+        ),
+        magicBoxEvents = MagicBoxEvents(
+            onMagicBoxClick = viewModel::onMagicBoxClick
         )
 
     )

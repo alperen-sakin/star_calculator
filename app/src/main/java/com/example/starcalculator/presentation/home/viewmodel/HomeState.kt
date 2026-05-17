@@ -10,5 +10,7 @@ data class HomeState(
 
     val costMagnet: String = "",
     val costGoldenScrap: String = "",
-    val costFragment: String = ""
+    val costFragment: String = "",
+
+    val isMagicBox: Boolean = false
 )

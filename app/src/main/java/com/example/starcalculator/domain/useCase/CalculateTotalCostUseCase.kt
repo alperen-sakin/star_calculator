@@ -1,10 +1,17 @@
 package com.example.starcalculator.domain.useCase
 
 import kotlin.math.floor
+import kotlin.math.log10
 import kotlin.math.max
 import kotlin.math.pow
 
-@Suppress("MagicNumber", "LongMethod", "ComplexMethod")
+@Suppress(
+    "MagicNumber",
+    "LongMethod",
+    "ComplexMethod",
+    "LongParameterList",
+    "ReturnCount"
+)
 class CalculateTotalCostUseCase {
 
     operator fun invoke(
@@ -12,7 +19,8 @@ class CalculateTotalCostUseCase {
         targetStarLevel: Int,
         scrapyardLevel: Int,
         achievementValue: Int,
-        masteryBoost17Value: Int
+        masteryBoost17Value: Int,
+        useMagic: Boolean
     ): Triple<Long, Long, Long> {
         var totalGs = 0L
         var totalMagnet = 0L
@@ -25,7 +33,13 @@ class CalculateTotalCostUseCase {
         for (star in currentStars) {
             for (index in star until targetStarLevel) {
                 totalGs += getGsCost(index, scrapyardMul, achievementMul, masteryBoost17Mul)
-                totalMagnet += getMagnetCost(index, scrapyardMul, achievementMul, masteryBoost17Mul)
+                totalMagnet += getMagnetCost(
+                    index,
+                    scrapyardMul,
+                    achievementMul,
+                    masteryBoost17Mul,
+                    useMagic
+                )
                 totalFragment += getFragmentCost(
                     index,
                     scrapyardMul,
@@ -54,6 +68,25 @@ class CalculateTotalCostUseCase {
 
     private fun getMasteryBoost17Modifier(amount: Int): Double {
         return 0.99.pow(floor(amount / 10.0))
+    }
+
+    private fun getMagicModifier(starLevel: Int, useMagic: Boolean): Double {
+        if (starLevel < 1760) return 1.0
+        if (!useMagic) return 1.0
+
+        val bulkSize = 300.0
+        val bulkPrecision = 1e8
+        val bulkDeviation =
+            (floor(1.1.pow(bulkSize) / bulkPrecision) * bulkPrecision) / 1.1.pow(bulkSize)
+
+        var jumpCount = floor((starLevel - 1760) / 50.0)
+        val bulkCount = floor(jumpCount / bulkSize)
+        jumpCount -= bulkCount * bulkSize
+
+        val precision = 10.0.pow(floor((log10(1.1) * jumpCount - 6.0) / 8.0) * 8.0 + 5.0)
+        val jumpDeviation = (floor(1.1.pow(jumpCount) / precision) * precision) / 1.1.pow(jumpCount)
+
+        return bulkDeviation.pow(bulkCount) * jumpDeviation
     }
 
     private fun getGsCost(
@@ -95,7 +128,8 @@ class CalculateTotalCostUseCase {
         starLevel: Int,
         scrapyardMul: Double,
         achievementMul: Double,
-        masteryBoost17Mul: Double
+        masteryBoost17Mul: Double,
+        useMagic: Boolean
     ): Long {
         var cost = 250.0 * (starLevel - 10) + 1000.0
 
@@ -187,8 +221,9 @@ class CalculateTotalCostUseCase {
             cost *= 1.1.pow(floor((starLevel - 1760) / 50.0))
         }
 
+        val magicMul = getMagicModifier(starLevel, useMagic)
         val rawResult =
-            (cost * 100.0) * achievementMul * masteryBoost17Mul / ((scrapyardMul + 100.0) * 1000.0)
+            (cost * 100.0) * achievementMul * masteryBoost17Mul * magicMul / ((scrapyardMul + 100.0) * 1000.0)
         return floor(rawResult).toLong()
     }
 

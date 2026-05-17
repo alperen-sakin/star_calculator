@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.starcalculator.domain.useCase.CalculateTotalCostUseCase
 import com.example.starcalculator.presentation.home.constants.Constants.MAX_LEVEL_LENGTH
 import com.example.starcalculator.presentation.home.constants.Constants.MAX_STARS
+import com.example.starcalculator.presentation.util.toFormattedNumber
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -145,14 +146,23 @@ class HomeViewModel @Inject constructor(
             targetStarLevel = targetLevel,
             scrapyardLevel = scrapyardLvl,
             achievementValue = achievementLvl,
-            masteryBoost17Value = masteryLvl
+            masteryBoost17Value = masteryLvl,
+            useMagic = currentState.isMagicBox
         )
 
         _state.update { state ->
             state.copy(
-                costMagnet = totalMagnet.toString(),
-                costGoldenScrap = totalGs.toString(),
-                costFragment = totalFragment.toString()
+                costMagnet = totalMagnet.toString().toFormattedNumber(),
+                costGoldenScrap = totalGs.toString().toFormattedNumber(),
+                costFragment = totalFragment.toString().toFormattedNumber()
+            )
+        }
+    }
+
+    fun onMagicBoxClick(isMagicBox: Boolean) {
+        _state.update { state ->
+            state.copy(
+                isMagicBox = isMagicBox
             )
         }
     }

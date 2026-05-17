@@ -5,3 +5,7 @@ data class ParameterBoxState(
     val value: String,
     val isHighlight: Boolean,
 )
+
+data class MagicBoxState(
+    val isMagicBox: Boolean
+)

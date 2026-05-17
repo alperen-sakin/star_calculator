@@ -28,6 +28,8 @@ fun ParametersSection(
     modifier: Modifier = Modifier,
     state: ParameterSectionState,
     events: ParameterSectionEvents,
+    magicBoxState: MagicBoxState,
+    magicBoxEvents: MagicBoxEvents
 ) {
     val items = listOf(
         ParameterItem(
@@ -69,28 +71,45 @@ fun ParametersSection(
             .background(color = SlateGray900),
 
     ) {
-        items.forEachIndexed { index, item ->
-            ParameterBox(
-                state = ParameterBoxState(
-                    title = item.title,
-                    value = item.value,
-                    isHighlight = item.isHighlight
-                ),
-                events = ParameterBoxEvents(
-                    onValueChange = item.onValueChange,
-                    onMinusClick = { events.onAdjustmentClick(item.type, false) },
-                    onPlusClick = { events.onAdjustmentClick(item.type, true) }
-                )
-            )
+        Parameters(items, events,)
 
-            if (index < items.lastIndex) {
-                HorizontalDivider(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(1.dp),
-                    color = SlateGray800
-                )
-            }
+        MagicBox(
+            state = MagicBoxState(
+                isMagicBox = magicBoxState.isMagicBox
+            ),
+            events = MagicBoxEvents(
+                onMagicBoxClick = magicBoxEvents.onMagicBoxClick
+            )
+        )
+    }
+}
+
+@Composable
+private fun Parameters(
+    items: List<ParameterItem>,
+    events: ParameterSectionEvents,
+) {
+    items.forEachIndexed { index, item ->
+        ParameterBox(
+            state = ParameterBoxState(
+                title = item.title,
+                value = item.value,
+                isHighlight = item.isHighlight
+            ),
+            events = ParameterBoxEvents(
+                onValueChange = item.onValueChange,
+                onMinusClick = { events.onAdjustmentClick(item.type, false) },
+                onPlusClick = { events.onAdjustmentClick(item.type, true) }
+            )
+        )
+
+        if (index < items.lastIndex) {
+            HorizontalDivider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp),
+                color = SlateGray800
+            )
         }
     }
 }
