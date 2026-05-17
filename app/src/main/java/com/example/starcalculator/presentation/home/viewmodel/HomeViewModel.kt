@@ -2,22 +2,34 @@ package com.example.starcalculator.presentation.home.viewmodel
 
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.starcalculator.domain.model.HomeData
+import com.example.starcalculator.domain.repository.HomeRepository
 import com.example.starcalculator.domain.useCase.CalculateTotalCostUseCase
 import com.example.starcalculator.presentation.home.constants.Constants.MAX_LEVEL_LENGTH
 import com.example.starcalculator.presentation.home.constants.Constants.MAX_STARS
 import com.example.starcalculator.presentation.util.toAbstractNotation
 import com.example.starcalculator.presentation.util.toFormattedNumber
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 enum class ParameterType { ACHIEVEMENT, MASTERY, SCRAPYARD, TARGET }
 
+@Suppress("TooManyFunctions", "MagicNumber")
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val calculateTotalCostUseCase: CalculateTotalCostUseCase
+    private val calculateTotalCostUseCase: CalculateTotalCostUseCase,
+    private val homeRepository: HomeRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
@@ -25,6 +37,63 @@ class HomeViewModel @Inject constructor(
 
     private val _starsStates = MutableStateFlow(StarsStates())
     val starsStates = _starsStates.asStateFlow()
+
+    init {
+        observeSavedData()
+        setupAutoSave()
+    }
+
+    private fun observeSavedData() {
+        viewModelScope.launch {
+            val homeData = homeRepository.getHomeData().firstOrNull()
+
+            homeData?.let { data ->
+                _state.update { state ->
+                    state.copy(
+                        targetStar = data.targetStar.toString(),
+                        scrapyardV2 = data.scrapyardV2.toString(),
+                        achievementLvl2 = data.achievementLvl2.toString(),
+                        masteryLvl17 = data.masteryLvl17.toString(),
+                        isMagicBox = data.isMagicBox
+                    )
+                }
+                _starsStates.update { starsState ->
+                    starsState.copy(
+                        stars = data.stars.map { it.toString() }
+                    )
+                }
+
+                onCalculateClick()
+            }
+        }
+    }
+
+    @OptIn(FlowPreview::class)
+    private fun setupAutoSave() {
+        viewModelScope.launch {
+            combine(_state, _starsStates) { state, starsState ->
+                Pair(state, starsState)
+            }
+                .debounce(500)
+                .collect { (state, starsState) ->
+                    val currentStarsList = starsState.stars.map { it.toIntOrNull() ?: 0 }
+
+                    val homeData = HomeData(
+                        stars = currentStarsList,
+                        targetStar = state.targetStar.toIntOrNull() ?: 0,
+                        scrapyardV2 = state.scrapyardV2.toIntOrNull() ?: 0,
+                        achievementLvl2 = state.achievementLvl2.toIntOrNull() ?: 0,
+                        masteryLvl17 = state.masteryLvl17.toIntOrNull() ?: 0,
+                        isMagicBox = state.isMagicBox
+
+                    )
+
+                    withContext(Dispatchers.IO) {
+                        homeRepository.saveHomeData(homeData)
+                    }
+                }
+        }
+    }
 
     fun onAllLevelChange(allLevel: String) {
         if (allLevel.length <= MAX_LEVEL_LENGTH && allLevel.isDigitsOnly()) {
